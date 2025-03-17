@@ -942,3 +942,4 @@ INSERT INTO Doctors (name, designation, speciality, location, fee) VALUES ('Dr R
 INSERT INTO Doctors (name, designation, speciality, location, fee) VALUES ('Dr Mohammad Tufail Ijaz', 'NA', 'Diabetologists', 'Shifa International Hospital                Pitras Bukhari Road, H-8/4, H-8, Islamabad.  H-8 , Rawalpindi', 'NA');
 INSERT INTO Doctors (name, designation, speciality, location, fee) VALUES ('Dr Khalida Khanum Naqvi', 'NA', 'Gynecologists', 'The Aga Khan University Hospital                 AKUH Consulting Clinic 4, Stadium Road, Karachi.  Stadium Road , karachi', 'NA');
 INSERT INTO Doctors (name, designation, speciality, location, fee) VALUES ('Dr Dawood Shaukat', 'NA', 'Diabetologists', 'Naz Hospital                6-A, Link Shadman Road, Shadman, Lahore.  Shadman , Lahore', 'NA');
+ehhe
