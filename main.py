@@ -27,12 +27,16 @@ class UI(QtWidgets.QMainWindow):
         super(UI, self).__init__()
         
         uic.loadUi('Screens/start_screen.ui', self)
+        
+        self.sign_up_personal_info_screen=None
+        self.sign_up_health_info_screen=None
 
         # Show the GUI
         self.show()
         # Event Handling
         self.sign_up_button.clicked.connect(self.handle_click)
         self.login_button.clicked.connect(self.handle_login)
+        self.sign_up_button.clicked.connect(self.handle_sign_up)
         
     def handle_login(self):
         entered_email=self.start_screen_email_field.text()
@@ -58,6 +62,19 @@ class UI(QtWidgets.QMainWindow):
         
     def handle_click(self):
         self.start_screen_email_field.setText("Welcome to QT Designer")
+        
+    def handle_sign_up(self):
+        self.sign_up_personal_info_screen=QtWidgets.QMainWindow()
+        uic.loadUi("Screens/sign_up_personal_info_Screen.ui",self.sign_up_personal_info_screen)
+        self.sign_up_personal_info_screen.show()
+        print("hehe trying to go to health info sign up screen")
+        self.sign_up_personal_info_screen.to_health_info.clicked.connect(self.handle_health_info)
+
+
+    def handle_health_info(self):
+        self.sign_up_health_info_screen=QtWidgets.QMainWindow()
+        uic.loadUi("Screens/sign_up_health_info_screen.ui",self.sign_up_health_info_screen)
+        self.sign_up_health_info_screen.show()        
 
 app = QtWidgets.QApplication(sys.argv)  # Create an instance of QtWidgets.QApplication
 window = UI()  # Create an instance of our class

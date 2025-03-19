@@ -20,57 +20,67 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>50</y>
-      <width>55</width>
-      <height>16</height>
+      <x>60</x>
+      <y>120</y>
+      <width>71</width>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size:25px;</string>
     </property>
     <property name="text">
      <string>Email</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>100</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Password</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="start_screen_email_field">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>50</y>
+      <x>210</x>
+      <y>110</y>
       <width>501</width>
-      <height>22</height>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:black;
+font-size:20px</string>
+    </property>
+    <property name="text">
+     <string>Enter your Email </string>
     </property>
    </widget>
    <widget class="QLineEdit" name="start_screen_password_field">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>90</y>
+      <x>210</x>
+      <y>190</y>
       <width>501</width>
-      <height>22</height>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:black;
+font-size:20px</string>
+    </property>
+    <property name="text">
+     <string>Enter your password</string>
     </property>
    </widget>
    <widget class="QPushButton" name="sign_up_button">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>360</y>
-      <width>131</width>
-      <height>61</height>
+      <x>150</x>
+      <y>300</y>
+      <width>191</width>
+      <height>101</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:12px;
+background-color:darkgray;
+font-size:25px
+</string>
     </property>
     <property name="text">
      <string>Signup</string>
@@ -79,14 +89,54 @@
    <widget class="QPushButton" name="login_button">
     <property name="geometry">
      <rect>
-      <x>432</x>
-      <y>360</y>
-      <width>131</width>
-      <height>61</height>
+      <x>440</x>
+      <y>300</y>
+      <width>211</width>
+      <height>101</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:darkgray;
+border-radius:12px;
+font-size:25px</string>
     </property>
     <property name="text">
      <string>Log In</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>10</y>
+      <width>201</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#333333;
+font-size:50px;
+font-weight:bold;
+</string>
+    </property>
+    <property name="text">
+     <string>IlajNow</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>190</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size:25px;</string>
+    </property>
+    <property name="text">
+     <string>Password</string>
     </property>
    </widget>
   </widget>
