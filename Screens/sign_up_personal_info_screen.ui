@@ -36,6 +36,9 @@
       <height>16</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font-size:15px;</string>
+    </property>
     <property name="text">
      <string>Personal Information</string>
     </property>
@@ -43,11 +46,14 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>64</x>
+      <x>54</x>
       <y>70</y>
-      <width>61</width>
+      <width>71</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size:15px;</string>
     </property>
     <property name="text">
      <string>Full Name</string>
@@ -242,6 +248,9 @@
       <width>55</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size=25px;</string>
     </property>
     <property name="text">
      <string>Area</string>
