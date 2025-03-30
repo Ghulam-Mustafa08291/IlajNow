@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>20</y>
+      <y>0</y>
       <width>161</width>
       <height>41</height>
      </rect>
@@ -34,10 +34,13 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>60</y>
-      <width>441</width>
-      <height>81</height>
+      <y>40</y>
+      <width>681</width>
+      <height>101</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
     <property name="title">
      <string>Seasonal Tips</string>
@@ -46,10 +49,13 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
-       <width>171</width>
+       <y>30</y>
+       <width>241</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size:20px</string>
      </property>
      <property name="text">
       <string>Personalized Health Tips:</string>
@@ -59,8 +65,8 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>40</y>
-       <width>311</width>
+       <y>60</y>
+       <width>651</width>
        <height>20</height>
       </rect>
      </property>
@@ -69,9 +75,9 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>80</x>
       <y>160</y>
-      <width>551</width>
+      <width>691</width>
       <height>111</height>
      </rect>
     </property>
@@ -83,9 +89,12 @@
       <rect>
        <x>10</x>
        <y>60</y>
-       <width>61</width>
+       <width>101</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size:17px</string>
      </property>
      <property name="text">
       <string>Next Dose:</string>
@@ -96,9 +105,12 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>121</width>
+       <width>161</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size:17px</string>
      </property>
      <property name="text">
       <string>Medication Reminder</string>
@@ -107,19 +119,19 @@
     <widget class="QLineEdit" name="lineEdit_2">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>40</y>
-       <width>141</width>
-       <height>16</height>
+       <x>180</x>
+       <y>36</y>
+       <width>271</width>
+       <height>20</height>
       </rect>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_3">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>70</y>
-       <width>113</width>
+       <x>180</x>
+       <y>60</y>
+       <width>271</width>
        <height>20</height>
       </rect>
      </property>
@@ -127,11 +139,17 @@
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>290</x>
-       <y>70</y>
-       <width>81</width>
-       <height>23</height>
+       <x>520</x>
+       <y>60</y>
+       <width>151</width>
+       <height>41</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:darkgray;
+color:white;
+border-radius:10px;
+</string>
      </property>
      <property name="text">
       <string>Mark as Taken</string>
@@ -140,11 +158,17 @@
     <widget class="QPushButton" name="pushButton_2">
      <property name="geometry">
       <rect>
-       <x>410</x>
-       <y>40</y>
-       <width>131</width>
+       <x>520</x>
+       <y>10</y>
+       <width>151</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:darkgray;
+color:white;
+border-radius:10px;
+</string>
      </property>
      <property name="text">
       <string>Manage your medication</string>
@@ -154,21 +178,21 @@
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>290</y>
-      <width>301</width>
+      <x>80</x>
+      <y>270</y>
+      <width>691</width>
       <height>80</height>
      </rect>
     </property>
     <property name="title">
-     <string>Seasonal Health Tips</string>
+     <string/>
     </property>
     <widget class="QLineEdit" name="lineEdit_4">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>141</width>
+       <width>551</width>
        <height>20</height>
       </rect>
      </property>
@@ -176,37 +200,66 @@
     <widget class="QPushButton" name="pushButton_3">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>570</x>
        <y>20</y>
-       <width>75</width>
-       <height>23</height>
+       <width>91</width>
+       <height>41</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:darkgray;
+color:white;
+border-radius:10px;
+
+</string>
      </property>
      <property name="text">
       <string>View More</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>191</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size:17px</string>
+     </property>
+     <property name="text">
+      <string>Seasonal Health Tips</string>
      </property>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_4">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>360</y>
-      <width>221</width>
+      <x>80</x>
+      <y>340</y>
+      <width>671</width>
       <height>80</height>
      </rect>
     </property>
     <property name="title">
-     <string>Health Alerts</string>
+     <string/>
     </property>
     <widget class="QPushButton" name="pushButton_4">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>30</y>
-       <width>75</width>
-       <height>23</height>
+       <x>570</x>
+       <y>20</y>
+       <width>91</width>
+       <height>41</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:darkgray;
+color:white;
+border-radius:10px;
+</string>
      </property>
      <property name="text">
       <string>Dismiss</string>
@@ -217,32 +270,57 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>113</width>
+       <width>551</width>
        <height>20</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>121</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size:17px</string>
+     </property>
+     <property name="text">
+      <string>Health Alerts</string>
      </property>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_5">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>360</y>
-      <width>371</width>
-      <height>141</height>
+      <x>80</x>
+      <y>400</y>
+      <width>691</width>
+      <height>131</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="title">
-     <string>Quick Actions</string>
+     <string/>
     </property>
     <widget class="QPushButton" name="pushButton_5">
      <property name="geometry">
       <rect>
-       <x>34</x>
-       <y>40</y>
-       <width>101</width>
-       <height>23</height>
+       <x>180</x>
+       <y>10</y>
+       <width>151</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:darkgray;
+color:white;
+border-radius:10px;
+</string>
      </property>
      <property name="text">
       <string>Symptom Checker</string>
@@ -251,11 +329,17 @@
     <widget class="QPushButton" name="pushButton_6">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>70</y>
-       <width>121</width>
-       <height>23</height>
+       <x>180</x>
+       <y>50</y>
+       <width>161</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:darkgray;
+color:white;
+border-radius:10px;
+</string>
      </property>
      <property name="text">
       <string>Book an Appointment</string>
@@ -264,11 +348,17 @@
     <widget class="QPushButton" name="pushButton_7">
      <property name="geometry">
       <rect>
-       <x>190</x>
-       <y>40</y>
-       <width>181</width>
-       <height>51</height>
+       <x>420</x>
+       <y>30</y>
+       <width>211</width>
+       <height>81</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:darkgray;
+color:white;
+border-radius:10px;
+</string>
      </property>
      <property name="text">
       <string>Manage your personal health data</string>
@@ -277,14 +367,36 @@
     <widget class="QPushButton" name="pushButton_8">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>100</y>
-       <width>91</width>
-       <height>23</height>
+       <x>180</x>
+       <y>90</y>
+       <width>161</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:darkgray;
+color:white;
+border-radius:10px;
+</string>
      </property>
      <property name="text">
       <string>Call emergency</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size:17px</string>
+     </property>
+     <property name="text">
+      <string>Quick Actions</string>
      </property>
     </widget>
    </widget>
@@ -295,7 +407,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
