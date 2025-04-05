@@ -340,7 +340,7 @@ class UI(QtWidgets.QMainWindow):
 
         # Commit the changes to the database
         connection.commit()
-        print("Account created successfully.")
+        print("Account created successfully heh.")
 
         
     
