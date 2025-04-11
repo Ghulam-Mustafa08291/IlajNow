@@ -3,6 +3,7 @@ from PyQt6 import QtWidgets, uic,QtGui, QtCore
 import sys
 import pyodbc
 from PyQt6.QtWidgets import QTableWidgetItem,QMessageBox
+from datetime import datetime
 
 #signup personal info screen values to be stored here
 new_user_name="" 
@@ -118,7 +119,30 @@ class UI(QtWidgets.QMainWindow):
             else:
                 print("Could not find user_id for the logged-in user.")
 
-                
+            
+            #now for getting the seasonal tips
+            current_date = datetime.now().date()
+            print(f"Current Date: {current_date}")    
+            
+            # Step 2: Fetch seasonal health tip valid for today
+            cursor.execute("""
+                SELECT content 
+                FROM HealthTips 
+                WHERE type = 'Seasonal' 
+                AND valid_from <= ? 
+                AND valid_to >= ?
+            """, current_date, current_date)    
+            
+            seasonal_tip = cursor.fetchone()
+            
+            if seasonal_tip:
+                seasonal_tip_content = seasonal_tip[0]
+                print(f"in dashboard screen,Seasonal Health Tip: {seasonal_tip_content}")
+                 # Set the seasonal health tip into the line edit on the dashboard
+                self.dashboard_screen.lineEdit_4.setText(seasonal_tip_content)
+            else:
+                print("No seasonal health tip valid for today.")
+                self.dashboard_screen.lineEdit_4.setText("No seasonal tip for today,stay safe :)")
 
             
             
