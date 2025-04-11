@@ -48,6 +48,10 @@ class UI(QtWidgets.QMainWindow):
         self.new_user_current_medication_lst=[]
         self.sign_up_personal_info_screen=None
         self.sign_up_health_info_screen=None
+        self.dashboard_screen=None
+        self.current_email=None
+        self.current_password=None
+        self.current_user_id=None
 
         # Show the GUI
         self.show()
@@ -57,15 +61,19 @@ class UI(QtWidgets.QMainWindow):
         self.sign_up_button.clicked.connect(self.handle_sign_up)
         
     def handle_login(self):
-        entered_email=self.start_screen_email_field.text()
-        entered_password=self.start_screen_password_field.text()
-        cursor.execute(f"SELECT email FROM Users WHERE email = '{entered_email}' AND password = '{entered_password}'")    
+        self.current_email=self.start_screen_email_field.text()
+        self.current_password=self.start_screen_password_field.text()
+        cursor.execute(f"SELECT email FROM Users WHERE email = '{self.current_email}' AND password = '{self.current_password}'")    
         rows=cursor.fetchall()
         if len(rows)==0:
             msg_box = QMessageBox()
             msg_box.setWindowTitle('Login failed')
             msg_box.setText('no user found!')
             msg_box.exec()
+            
+            
+            
+            
         else:
           
             print(rows)
@@ -74,9 +82,51 @@ class UI(QtWidgets.QMainWindow):
             msg_box.setText('user found!')
             msg_box.exec()
             
+            
+            # NOW BELOW TRYNNA IMPLEMENT THE DASHBOARD LOGIC
+            self.dashboard_screen=QtWidgets.QMainWindow()
+            uic.loadUi("Screens/dashboard_screen.ui",self.dashboard_screen)
+            self.dashboard_screen.show()
+            print("hehe trying to go to load dashboared hehe")
+            
+            cursor.execute("""
+            SELECT user_id FROM Users 
+            WHERE email = ? AND password = ?
+        """, self.current_email, self.current_password)
+            
+            user_id_result = cursor.fetchone()
+            # print("in dashboardscreen,user id:",self.current_user_id)
+            if user_id_result:
+                self.current_user_id = user_id_result[0]
+                print(f"in dashboard screen,Logged-in user_id: {self.current_user_id}")
+                
+                # Now fetch the medication reminder and next dose
+                cursor.execute("""
+                    SELECT name, next_dose 
+                    FROM Medications 
+                    WHERE user_id = ?
+                """, self.current_user_id)
+                medication = cursor.fetchone()
+                
+                if medication:
+                    med_name, next_dose = medication
+                    print(f"Medication: {med_name}, Next Dose: {next_dose}") 
+                    self.dashboard_screen.lineEdit_2.setText(str(med_name))
+                    self.dashboard_screen.lineEdit_3.setText(str(next_dose))
+                else:
+                    print("No medication found for this user.")
+            else:
+                print("Could not find user_id for the logged-in user.")
+
+                
+
+            
+            
             # self.home_screen=QtWidgets.QMainWindow() #window is initialized to none in the init function
             # uic.loadUi("HOME.ui",self.home_screen)
-        
+     
+    # def load_dashboard(self):
+    #     print("hehe trynna load dashboard")   
         
     def handle_click(self):
         self.start_screen_email_field.setText("Welcome to QT Designer")
