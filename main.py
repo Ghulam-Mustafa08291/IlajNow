@@ -53,6 +53,7 @@ class UI(QtWidgets.QMainWindow):
         self.current_email=None
         self.current_password=None
         self.current_user_id=None
+        self.symptom_checker_screen=None
 
         # Show the GUI
         self.show()
@@ -84,11 +85,15 @@ class UI(QtWidgets.QMainWindow):
             msg_box.exec()
             
             
+            
+            
             # NOW BELOW TRYNNA IMPLEMENT THE DASHBOARD LOGIC
             self.dashboard_screen=QtWidgets.QMainWindow()
             uic.loadUi("Screens/dashboard_screen.ui",self.dashboard_screen)
             self.dashboard_screen.show()
             print("hehe trying to go to load dashboared hehe")
+            
+            self.dashboard_screen.pushButton_5.clicked.connect(self.handle_symptom_checker)
             
             cursor.execute("""
             SELECT user_id FROM Users 
@@ -151,6 +156,12 @@ class UI(QtWidgets.QMainWindow):
      
     # def load_dashboard(self):
     #     print("hehe trynna load dashboard")   
+      
+    def handle_symptom_checker(self):
+        self.symptom_checker_screen=QtWidgets.QMainWindow()
+        uic.loadUi("Screens/symptoms_checker.ui",self.symptom_checker_screen)
+        self.symptom_checker_screen.show()
+        print("hehe trying to load symptom checker screen in dashboard")
         
     def handle_click(self):
         self.start_screen_email_field.setText("Welcome to QT Designer")
