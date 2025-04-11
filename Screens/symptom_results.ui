@@ -30,10 +30,10 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>130</y>
-      <width>521</width>
-      <height>211</height>
+      <x>100</x>
+      <y>90</y>
+      <width>621</width>
+      <height>351</height>
      </rect>
     </property>
     <property name="title">
@@ -42,8 +42,8 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>16</x>
-       <y>40</y>
+       <x>20</x>
+       <y>30</y>
        <width>91</width>
        <height>20</height>
       </rect>
@@ -52,31 +52,11 @@
       <string>Possible Condition:</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>40</y>
-       <width>251</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>90</y>
-       <width>251</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>90</y>
+       <y>110</y>
        <width>71</width>
        <height>20</height>
       </rect>
@@ -88,8 +68,8 @@
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>140</y>
+       <x>40</x>
+       <y>220</y>
        <width>71</width>
        <height>16</height>
       </rect>
@@ -98,21 +78,11 @@
       <string>Treatment:</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_3">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>140</y>
-       <width>261</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>180</y>
+       <x>160</x>
+       <y>310</y>
        <width>121</width>
        <height>23</height>
       </rect>
@@ -121,12 +91,42 @@
       <string>Consult a Doctor</string>
      </property>
     </widget>
+    <widget class="QTextEdit" name="textEdit">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>20</y>
+       <width>481</width>
+       <height>87</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEdit_2">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>110</y>
+       <width>481</width>
+       <height>87</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEdit_3">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>200</y>
+       <width>481</width>
+       <height>87</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>370</y>
+      <y>450</y>
       <width>211</width>
       <height>23</height>
      </rect>
@@ -139,7 +139,7 @@
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>420</y>
+      <y>490</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -155,7 +155,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

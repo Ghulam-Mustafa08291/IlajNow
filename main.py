@@ -47,6 +47,12 @@ class UI(QtWidgets.QMainWindow):
         
         uic.loadUi('Screens/start_screen.ui', self)
         self.new_user_current_medication_lst=[]
+        self.entered_symptoms = []
+        self.symptom_ids = []
+        self.disease_ids = []
+        self.disease_names = []
+        self.treatments = []
+        
         self.sign_up_personal_info_screen=None
         self.sign_up_health_info_screen=None
         self.dashboard_screen=None
@@ -163,6 +169,87 @@ class UI(QtWidgets.QMainWindow):
         self.symptom_checker_screen.show()
         print("hehe trying to load symptom checker screen in dashboard")
         
+        self.symptom_checker_screen.pushButton.clicked.connect(self.handle_check_symptoms)
+        
+    def handle_check_symptoms(self):
+        # Clear previous entries
+        self.entered_symptoms.clear()
+        self.symptom_ids.clear()
+        
+        # Step 1: Get symptoms entered by user
+        raw_input = self.symptom_checker_screen.textEdit.toPlainText()
+
+        if not raw_input.strip():
+            msg_box = QMessageBox()
+            msg_box.setWindowTitle("No Input")
+            msg_box.setText("Please enter at least one symptom.")
+            msg_box.exec()
+            return
+        
+         # Step 2: Clean and split symptoms
+        symptoms = [sym.strip() for sym in raw_input.split(',') if sym.strip()]
+        self.entered_symptoms = symptoms
+
+        print("Entered Symptoms:", self.entered_symptoms)
+        
+         # Step 3: Lookup symptom_id for each
+        for symptom in self.entered_symptoms:
+            cursor.execute("""
+                SELECT symptom_id FROM SymptomsNormalized WHERE description = ?
+            """, symptom)
+            result = cursor.fetchone()
+            if result:
+                self.symptom_ids.append(result[0])
+            else:
+                print(f"Symptom '{symptom}' not found in DB.")
+        
+        print("Symptom IDs found:", self.symptom_ids)
+        
+        if not self.symptom_ids:
+            msg_box = QMessageBox()
+            msg_box.setWindowTitle("No Matches")
+            msg_box.setText("None of the entered symptoms matched our records.")
+            msg_box.exec()
+            return
+        
+         # Step 4: Get disease IDs from SymptomCondition
+        for sym_id in self.symptom_ids:
+            cursor.execute("SELECT disease_id FROM SymptomCondition WHERE symptom_id = ?", sym_id)
+            results = cursor.fetchall()
+            for row in results:
+                self.disease_ids.append(row[0])
+        # Optional: Remove duplicate disease_ids
+        self.disease_ids = list(set(self.disease_ids))
+        
+        print("disease ids found:",self.disease_ids)
+        if not self.disease_ids:
+            QMessageBox.warning(self, "No Related Conditions", "No conditions found for entered symptoms.")
+            return
+        
+            # Step 5: Get disease names
+        for dis_id in self.disease_ids:
+            cursor.execute("SELECT disease_name FROM Diseases WHERE disease_id = ?", dis_id)
+            res = cursor.fetchone()
+            if res:
+                self.disease_names.append(res[0])
+        print("disease name found:",self.disease_names) 
+         # Step 6: Get treatments
+        for dis_id in self.disease_ids:
+            cursor.execute("SELECT description FROM Treatments WHERE disease_id = ?", dis_id)
+            res = cursor.fetchone()
+            if res:
+                self.treatments.append(res[0])
+        print("treatments found:",self.treatments)      
+         # Step 7: Show results screen
+        self.symptom_result_screen = QtWidgets.QMainWindow()
+        uic.loadUi("Screens/symptom_results.ui", self.symptom_result_screen)
+        self.symptom_result_screen.show()
+                    
+        # Step 8: Populate result fields
+        self.symptom_result_screen.textEdit.setText('\n'.join(self.disease_names))
+        self.symptom_result_screen.textEdit_2.setText(', '.join(self.entered_symptoms))
+        self.symptom_result_screen.textEdit_3.setText('\n'.join(self.treatments))
+        
     def handle_click(self):
         self.start_screen_email_field.setText("Welcome to QT Designer")
         
@@ -172,6 +259,8 @@ class UI(QtWidgets.QMainWindow):
         uic.loadUi("Screens/sign_up_personal_info_Screen.ui",self.sign_up_personal_info_screen)
         self.sign_up_personal_info_screen.show()
         print("hehe trying to go to health info sign up screen")
+        
+        
         
       
         
