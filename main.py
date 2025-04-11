@@ -175,6 +175,9 @@ class UI(QtWidgets.QMainWindow):
         # Clear previous entries
         self.entered_symptoms.clear()
         self.symptom_ids.clear()
+        self.disease_ids.clear()
+        self.disease_names.clear()
+        self.treatments.clear()
         
         # Step 1: Get symptoms entered by user
         raw_input = self.symptom_checker_screen.textEdit.toPlainText()
@@ -248,7 +251,11 @@ class UI(QtWidgets.QMainWindow):
         # Step 8: Populate result fields
         self.symptom_result_screen.textEdit.setText('\n'.join(self.disease_names))
         self.symptom_result_screen.textEdit_2.setText(', '.join(self.entered_symptoms))
-        self.symptom_result_screen.textEdit_3.setText('\n'.join(self.treatments))
+        # self.symptom_result_screen.textEdit_3.setText('\n'.join(self.treatments))
+        formatted_treatments = []
+        for i in range(len(self.disease_names)):
+            formatted_treatments.append(f"For {self.disease_names[i]}, use: {self.treatments[i]}")
+        self.symptom_result_screen.textEdit_3.setText('\n'.join(formatted_treatments))
         
     def handle_click(self):
         self.start_screen_email_field.setText("Welcome to QT Designer")
