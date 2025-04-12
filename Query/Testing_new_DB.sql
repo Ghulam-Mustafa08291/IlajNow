@@ -19,6 +19,17 @@ DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Doctors;
 
 -- Create Tables
+
+CREATE TABLE DoctorDiseases ( --added this latest,to map doctors to disease
+    doctor_id INT,
+    disease_id INT,
+    PRIMARY KEY (doctor_id, disease_id),
+    FOREIGN KEY (doctor_id) REFERENCES Doctors(doctor_id),
+    FOREIGN KEY (disease_id) REFERENCES Diseases(disease_id)
+);
+
+
+
 CREATE TABLE Users (
     user_id INT PRIMARY KEY IDENTITY(1,1),
     email NVARCHAR(255) UNIQUE NOT NULL,
@@ -220,6 +231,20 @@ SELECT * FROM Medications WHERE user_id = 1;
 
 
 ---------------------------------------------------------------------------------------
+
+
+INSERT INTO DoctorDiseases (doctor_id, disease_id) VALUES
+(1, 9),  -- Dr. Ahmed Khan (Cardiology) treats Coronary Artery Disease
+(3, 1),  -- Dr. Farhan Siddiqui (Endocrinology) treats Diabetes Mellitus
+(3, 7),  -- Dr. Farhan Siddiqui (Endocrinology) treats Hyperthyroidism
+(4, 6),  -- Dr. Zainab Shah (Neurology) treats Epilepsy
+(5, 5),  -- Dr. Bilal Hassan (Orthopedics) treats Osteoarthritis
+(6, 3),  -- Dr. Ayesha Malik (Pediatrics) treats Asthma
+(7, 9),  -- Dr. Omar Farooq (Oncology) treats Cancer
+(8, 6),  -- Dr. Nadia Akhtar (Psychiatry) treats Epilepsy
+(9, 10), -- Dr. Imran Raza (Gastroenterology) treats Gastroesophageal Reflux Disease
+(10, 8); -- Dr. Sana Kamran (Pulmonology) treats Chronic Obstructive Pulmonary Disease
+
 
 
 -- Insert Users
