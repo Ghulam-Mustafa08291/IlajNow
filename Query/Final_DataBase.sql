@@ -1503,5 +1503,29 @@ INSERT INTO RemedyDetail (remedy_id, full_remedy) VALUES
 
 
 
+SELECT * FROM Users;
+SELECT * FROM User_details;
+SELECT * FROM EmergencyContact;
+SELECT * FROM Medical_conditions;
+SELECT * FROM UserMedicalCondition;
+SELECT * FROM Allergies;
+SELECT * FROM UserAllergy;
+SELECT * FROM Medications;
+SELECT * FROM Doctors;
+SELECT * FROM DoctorAvailability;
+SELECT * FROM Diseases;
+SELECT * FROM DoctorDiseases;
+SELECT * FROM SymptomsNormalized;
+SELECT * FROM SymptomCondition;
+SELECT * FROM Treatments;
+SELECT * FROM Appointments;
+SELECT * FROM Orders;
+SELECT * FROM HealthTips;
+SELECT * FROM HealthAlerts;
+SELECT * FROM PersonalizedHealthTips;
+SELECT * FROM Medicine;
+SELECT * FROM Remedy;
+SELECT * FROM RemedyDetail;
+
 
 
