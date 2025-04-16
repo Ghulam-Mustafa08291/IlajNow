@@ -47,11 +47,12 @@ class UI(QtWidgets.QMainWindow):
         
         uic.loadUi('Screens/start_screen.ui', self)
         self.new_user_current_medication_lst=[]
-        self.entered_symptoms = []
-        self.symptom_ids = []
-        self.disease_ids = []
-        self.disease_names = []
-        self.treatments = []
+        # self.entered_symptoms = []
+        # self.symptom_ids = []
+        # self.disease_ids = []
+        # self.disease_names = []
+        # self.treatments = []
+        
         self.selected_symptoms = []  # To store selected symptoms
         self.diseases_found = {}     # To store diseases and their corresponding symptom counts
         
@@ -180,11 +181,11 @@ class UI(QtWidgets.QMainWindow):
             
     def handle_check_symptoms(self):
         # Clear previous entries
-        self.entered_symptoms.clear()
-        self.symptom_ids.clear()
-        self.disease_ids.clear()
-        self.disease_names.clear()
-        self.treatments.clear()
+        # self.entered_symptoms.clear()
+        # self.symptom_ids.clear()
+        # self.disease_ids.clear()
+        # self.disease_names.clear()
+        # self.treatments.clear()
         
         for dropdown in [self.symptom_checker_screen.comboBox_2, self.symptom_checker_screen.comboBox_3,self.symptom_checker_screen.comboBox_4, self.symptom_checker_screen.comboBox_5]:
                         symptom = dropdown.currentText()
@@ -199,6 +200,30 @@ class UI(QtWidgets.QMainWindow):
             msg_box.exec()
             return  # Exit the function if not enough symptoms are selected
         
+        
+         # Step 2: Process symptoms to check for diseases
+        for symptom in self.selected_symptoms:
+            cursor.execute("SELECT disease_id FROM SymptomCondition WHERE symptom_id = (SELECT symptom_id FROM SymptomsNormalized WHERE description = ?)", symptom)
+            results = cursor.fetchall()
+            for row in results:
+                disease_id = row[0]
+                if disease_id not in self.diseases_found:
+                    self.diseases_found[disease_id] = 1  # First symptom for this disease
+                else:
+                    self.diseases_found[disease_id] += 1  # Add symptom for this disease
+        
+        # Step 3: Check if we have enough symptoms for each disease
+        diseases_to_diagnose = [disease_id for disease_id, count in self.diseases_found.items() if count >= 2]
+        
+        if not diseases_to_diagnose:
+            msg_box = QMessageBox()
+            msg_box.setWindowTitle("No Diagnosis Available")
+            msg_box.setText("Not enough symptoms selected for any disease. Please try again with more symptoms.")
+            msg_box.exec()
+            return  # Exit if no disease can be diagnosed based on symptoms
+    
+            
+            
         # # Step 1: Get symptoms entered by user
         # raw_input = self.symptom_checker_screen.textEdit.toPlainText()
 
