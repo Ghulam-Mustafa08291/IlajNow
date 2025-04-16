@@ -25,7 +25,7 @@ new_user_current_medication=""
 new_user_current_doctor=""
 
 server="DESKTOP-6J02DRS\SQLEXPRESS"
-database="testing"
+database="IlajNow_Final"
 use_windows_authentication=True
 username=""
 password=""
@@ -52,6 +52,9 @@ class UI(QtWidgets.QMainWindow):
         self.disease_ids = []
         self.disease_names = []
         self.treatments = []
+        self.selected_symptoms = []  # To store selected symptoms
+        self.diseases_found = {}     # To store diseases and their corresponding symptom counts
+        
         
         self.sign_up_personal_info_screen=None
         self.sign_up_health_info_screen=None
