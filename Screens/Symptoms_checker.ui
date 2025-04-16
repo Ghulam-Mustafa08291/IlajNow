@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>655</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,258 +27,1282 @@
      <string>Symptoms Checker</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>80</y>
-      <width>471</width>
-      <height>401</height>
+      <x>270</x>
+      <y>500</y>
+      <width>161</width>
+      <height>31</height>
      </rect>
     </property>
-    <property name="title">
-     <string>Choose Symptoms</string>
+    <property name="text">
+     <string>Check Symptoms</string>
     </property>
-    <widget class="QComboBox" name="comboBox_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>70</y>
-       <width>191</width>
-       <height>41</height>
-      </rect>
+   </widget>
+   <widget class="QComboBox" name="comboBox_5">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>290</y>
+      <width>191</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Select Symptom</string>
      </property>
-     <item>
-      <property name="text">
-       <string>Excessive thirst (Polydipsia)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Frequent urination (Polyuria)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Chest pain or discomfort</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Shortness of breath (Dyspnea)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Severe headache with aura</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Joint pain and stiffness</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Tonic-clonic seizures</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Unintentional weight loss</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Chronic productive cough</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Burning chest pain (Heartburn)</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QComboBox" name="comboBox_3">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>70</y>
-       <width>191</width>
-       <height>41</height>
-      </rect>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chest pain</string>
      </property>
-     <item>
-      <property name="text">
-       <string>Excessive thirst (Polydipsia)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Frequent urination (Polyuria)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Chest pain or discomfort</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Shortness of breath (Dyspnea)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Severe headache with aura</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Joint pain and stiffness</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Tonic-clonic seizures</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Unintentional weight loss</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Chronic productive cough</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Burning chest pain (Heartburn)</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QComboBox" name="comboBox_5">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>240</y>
-       <width>191</width>
-       <height>41</height>
-      </rect>
+    </item>
+    <item>
+     <property name="text">
+      <string>Shortness of breath
+</string>
      </property>
-     <item>
-      <property name="text">
-       <string>Excessive thirst (Polydipsia)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Frequent urination (Polyuria)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Chest pain or discomfort</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Shortness of breath (Dyspnea)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Severe headache with aura</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Joint pain and stiffness</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Tonic-clonic seizures</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Unintentional weight loss</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Chronic productive cough</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Burning chest pain (Heartburn)</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QComboBox" name="comboBox_4">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>240</y>
-       <width>191</width>
-       <height>41</height>
-      </rect>
+    </item>
+    <item>
+     <property name="text">
+      <string>Persistent cough
+</string>
      </property>
-     <item>
-      <property name="text">
-       <string>Excessive thirst (Polydipsia)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Frequent urination (Polyuria)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Chest pain or discomfort</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Shortness of breath (Dyspnea)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Severe headache with aura</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Joint pain and stiffness</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Tonic-clonic seizures</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Unintentional weight loss</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Chronic productive cough</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Burning chest pain (Heartburn)</string>
-      </property>
-     </item>
-    </widget>
+    </item>
+    <item>
+     <property name="text">
+      <string>Wheezing</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Fatigue</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Palpitations</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>High blood pressure
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Excessive thirst
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Frequent urination
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Unexplained weight loss
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Blurred vision
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Tingling in hands/feet
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chronic cough
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Phlegm production
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chest tightness
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Joint pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Joint swelling
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Morning stiffness
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Back pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Loss of height over time
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Sudden joint pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Redness in joints
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Swollen big toe
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Decreased urine output
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Swelling in legs
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Nausea
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Heartburn
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Abdominal pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Diarrhea
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Blood in stool
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Jaundice
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Abdominal swelling
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Fever
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Night sweats
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Skin rash
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Depressed mood
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Mania episodes
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Excessive worry
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Obsessive thoughts
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Hallucinations
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Delusions
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Scaly skin patches
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Itchy skin
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Butterfly-shaped facial rash
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Muscle pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Persistent tiredness
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>High fever
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Severe headache
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Muscle aches
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Runny nose
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Skin blisters</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboBox_4">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>130</y>
+      <width>191</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Select Symptom</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chest pain</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Shortness of breath
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Persistent cough
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Wheezing</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Fatigue</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Palpitations</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>High blood pressure
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Excessive thirst
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Frequent urination
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Unexplained weight loss
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Blurred vision
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Tingling in hands/feet
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chronic cough
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Phlegm production
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chest tightness
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Joint pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Joint swelling
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Morning stiffness
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Back pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Loss of height over time
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Sudden joint pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Redness in joints
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Swollen big toe
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Decreased urine output
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Swelling in legs
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Nausea
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Heartburn
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Abdominal pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Diarrhea
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Blood in stool
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Jaundice
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Abdominal swelling
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Fever
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Night sweats
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Skin rash
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Depressed mood
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Mania episodes
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Excessive worry
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Obsessive thoughts
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Hallucinations
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Delusions
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Scaly skin patches
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Itchy skin
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Butterfly-shaped facial rash
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Muscle pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Persistent tiredness
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>High fever
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Severe headache
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Muscle aches
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Runny nose
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Skin blisters</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboBox_3">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>290</y>
+      <width>191</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Select Symptom</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chest pain</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Shortness of breath
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Persistent cough
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Wheezing</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Fatigue</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Palpitations</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>High blood pressure
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Excessive thirst
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Frequent urination
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Unexplained weight loss
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Blurred vision
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Tingling in hands/feet
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chronic cough
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Phlegm production
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chest tightness
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Joint pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Joint swelling
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Morning stiffness
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Back pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Loss of height over time
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Sudden joint pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Redness in joints
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Swollen big toe
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Decreased urine output
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Swelling in legs
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Nausea
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Heartburn
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Abdominal pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Diarrhea
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Blood in stool
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Jaundice
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Abdominal swelling
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Fever
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Night sweats
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Skin rash
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Depressed mood
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Mania episodes
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Excessive worry
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Obsessive thoughts
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Hallucinations
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Delusions
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Scaly skin patches
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Itchy skin
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Butterfly-shaped facial rash
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Muscle pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Persistent tiredness
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>High fever
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Severe headache
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Muscle aches
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Runny nose
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Skin blisters</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboBox_2">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>130</y>
+      <width>191</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Select Symptom</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chest pain</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Shortness of breath
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Persistent cough
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Wheezing</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Fatigue</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Palpitations</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>High blood pressure
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Excessive thirst
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Frequent urination
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Unexplained weight loss
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Blurred vision
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Tingling in hands/feet
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chronic cough
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Phlegm production
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chest tightness
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Joint pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Joint swelling
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Morning stiffness
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Back pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Loss of height over time
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Sudden joint pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Redness in joints
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Swollen big toe
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Decreased urine output
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Swelling in legs
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Nausea
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Heartburn
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Abdominal pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Diarrhea
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Blood in stool
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Jaundice
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Abdominal swelling
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Fever
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Night sweats
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Skin rash
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Depressed mood
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Mania episodes
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Excessive worry
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Obsessive thoughts
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Hallucinations
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Delusions
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Scaly skin patches
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Itchy skin
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Butterfly-shaped facial rash
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Muscle pain
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Persistent tiredness
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>High fever
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Severe headache
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Muscle aches
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Runny nose
+</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Skin blisters</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

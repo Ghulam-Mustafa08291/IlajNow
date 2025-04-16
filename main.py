@@ -172,8 +172,12 @@ class UI(QtWidgets.QMainWindow):
         self.symptom_checker_screen.show()
         print("hehe trying to load symptom checker screen in dashboard")
         
-        self.symptom_checker_screen.pushButton.clicked.connect(self.handle_check_symptoms)
+        #below logic to get symtpoms from user
         
+        
+            
+        self.symptom_checker_screen.pushButton.clicked.connect(self.handle_check_symptoms)
+            
     def handle_check_symptoms(self):
         # Clear previous entries
         self.entered_symptoms.clear()
@@ -182,83 +186,96 @@ class UI(QtWidgets.QMainWindow):
         self.disease_names.clear()
         self.treatments.clear()
         
-        # Step 1: Get symptoms entered by user
-        raw_input = self.symptom_checker_screen.textEdit.toPlainText()
-
-        if not raw_input.strip():
-            msg_box = QMessageBox()
-            msg_box.setWindowTitle("No Input")
-            msg_box.setText("Please enter at least one symptom.")
+        for dropdown in [self.symptom_checker_screen.comboBox_2, self.symptom_checker_screen.comboBox_3,self.symptom_checker_screen.comboBox_4, self.symptom_checker_screen.comboBox_5]:
+                        symptom = dropdown.currentText()
+                        if symptom and symptom != 'Select Symptom':  # Make sure it's not the default value
+                            self.selected_symptoms.append(symptom)
+                            print("the user selected symptom:",symptom)
+        
+        if len(self.selected_symptoms) < 2:  # Check if we have at least 2 symptoms inputted by symptom checker screen
+            msg_box = QMessageBox() #MIGHT SHOW A SCREEN HERE FOR REMEDIES
+            msg_box.setWindowTitle("Insufficient Symptoms")
+            msg_box.setText("Please select at least two symptoms for accurate diagnosis.")
             msg_box.exec()
-            return
+            return  # Exit the function if not enough symptoms are selected
         
-         # Step 2: Clean and split symptoms
-        symptoms = [sym.strip() for sym in raw_input.split(',') if sym.strip()]
-        self.entered_symptoms = symptoms
+        # # Step 1: Get symptoms entered by user
+        # raw_input = self.symptom_checker_screen.textEdit.toPlainText()
 
-        print("Entered Symptoms:", self.entered_symptoms)
+        # if not raw_input.strip():
+        #     msg_box = QMessageBox()
+        #     msg_box.setWindowTitle("No Input")
+        #     msg_box.setText("Please enter at least one symptom.")
+        #     msg_box.exec()
+        #     return
         
-         # Step 3: Lookup symptom_id for each
-        for symptom in self.entered_symptoms:
-            cursor.execute("""
-                SELECT symptom_id FROM SymptomsNormalized WHERE description = ?
-            """, symptom)
-            result = cursor.fetchone()
-            if result:
-                self.symptom_ids.append(result[0])
-            else:
-                print(f"Symptom '{symptom}' not found in DB.")
+        #  # Step 2: Clean and split symptoms
+        # symptoms = [sym.strip() for sym in raw_input.split(',') if sym.strip()]
+        # self.entered_symptoms = symptoms
+
+        # print("Entered Symptoms:", self.entered_symptoms)
         
-        print("Symptom IDs found:", self.symptom_ids)
+        #  # Step 3: Lookup symptom_id for each
+        # for symptom in self.entered_symptoms:
+        #     cursor.execute("""
+        #         SELECT symptom_id FROM SymptomsNormalized WHERE description = ?
+        #     """, symptom)
+        #     result = cursor.fetchone()
+        #     if result:
+        #         self.symptom_ids.append(result[0])
+        #     else:
+        #         print(f"Symptom '{symptom}' not found in DB.")
         
-        if not self.symptom_ids:
-            msg_box = QMessageBox()
-            msg_box.setWindowTitle("No Matches")
-            msg_box.setText("None of the entered symptoms matched our records.")
-            msg_box.exec()
-            return
+        # print("Symptom IDs found:", self.symptom_ids)
         
-         # Step 4: Get disease IDs from SymptomCondition
-        for sym_id in self.symptom_ids:
-            cursor.execute("SELECT disease_id FROM SymptomCondition WHERE symptom_id = ?", sym_id)
-            results = cursor.fetchall()
-            for row in results:
-                self.disease_ids.append(row[0])
-        # Optional: Remove duplicate disease_ids
-        self.disease_ids = list(set(self.disease_ids))
+        # if not self.symptom_ids:
+        #     msg_box = QMessageBox()
+        #     msg_box.setWindowTitle("No Matches")
+        #     msg_box.setText("None of the entered symptoms matched our records.")
+        #     msg_box.exec()
+        #     return
         
-        print("disease ids found:",self.disease_ids)
-        if not self.disease_ids:
-            QMessageBox.warning(self, "No Related Conditions", "No conditions found for entered symptoms.")
-            return
+        #  # Step 4: Get disease IDs from SymptomCondition
+        # for sym_id in self.symptom_ids:
+        #     cursor.execute("SELECT disease_id FROM SymptomCondition WHERE symptom_id = ?", sym_id)
+        #     results = cursor.fetchall()
+        #     for row in results:
+        #         self.disease_ids.append(row[0])
+        # # Optional: Remove duplicate disease_ids
+        # self.disease_ids = list(set(self.disease_ids))
         
-            # Step 5: Get disease names
-        for dis_id in self.disease_ids:
-            cursor.execute("SELECT disease_name FROM Diseases WHERE disease_id = ?", dis_id)
-            res = cursor.fetchone()
-            if res:
-                self.disease_names.append(res[0])
-        print("disease name found:",self.disease_names) 
-         # Step 6: Get treatments
-        for dis_id in self.disease_ids:
-            cursor.execute("SELECT description FROM Treatments WHERE disease_id = ?", dis_id)
-            res = cursor.fetchone()
-            if res:
-                self.treatments.append(res[0])
-        print("treatments found:",self.treatments)      
-         # Step 7: Show results screen
-        self.symptom_result_screen = QtWidgets.QMainWindow()
-        uic.loadUi("Screens/symptom_results.ui", self.symptom_result_screen)
-        self.symptom_result_screen.show()
+        # print("disease ids found:",self.disease_ids)
+        # if not self.disease_ids:
+        #     QMessageBox.warning(self, "No Related Conditions", "No conditions found for entered symptoms.")
+        #     return
+        
+        #     # Step 5: Get disease names
+        # for dis_id in self.disease_ids:
+        #     cursor.execute("SELECT disease_name FROM Diseases WHERE disease_id = ?", dis_id)
+        #     res = cursor.fetchone()
+        #     if res:
+        #         self.disease_names.append(res[0])
+        # print("disease name found:",self.disease_names) 
+        #  # Step 6: Get treatments
+        # for dis_id in self.disease_ids:
+        #     cursor.execute("SELECT description FROM Treatments WHERE disease_id = ?", dis_id)
+        #     res = cursor.fetchone()
+        #     if res:
+        #         self.treatments.append(res[0])
+        # print("treatments found:",self.treatments)      
+        #  # Step 7: Show results screen
+        # self.symptom_result_screen = QtWidgets.QMainWindow()
+        # uic.loadUi("Screens/symptom_results.ui", self.symptom_result_screen)
+        # self.symptom_result_screen.show()
                     
-        # Step 8: Populate result fields
-        self.symptom_result_screen.textEdit.setText('\n'.join(self.disease_names))
-        self.symptom_result_screen.textEdit_2.setText(', '.join(self.entered_symptoms))
-        # self.symptom_result_screen.textEdit_3.setText('\n'.join(self.treatments))
-        formatted_treatments = []
-        for i in range(len(self.disease_names)):
-            formatted_treatments.append(f"For {self.disease_names[i]}, use: {self.treatments[i]}")
-        self.symptom_result_screen.textEdit_3.setText('\n'.join(formatted_treatments))
+        # # Step 8: Populate result fields
+        # self.symptom_result_screen.textEdit.setText('\n'.join(self.disease_names))
+        # self.symptom_result_screen.textEdit_2.setText(', '.join(self.entered_symptoms))
+        # # self.symptom_result_screen.textEdit_3.setText('\n'.join(self.treatments))
+        # formatted_treatments = []
+        # for i in range(len(self.disease_names)):
+        #     formatted_treatments.append(f"For {self.disease_names[i]}, use: {self.treatments[i]}")
+        # self.symptom_result_screen.textEdit_3.setText('\n'.join(formatted_treatments))
         
     def handle_click(self):
         self.start_screen_email_field.setText("Welcome to QT Designer")
