@@ -47,11 +47,11 @@ class UI(QtWidgets.QMainWindow):
         
         uic.loadUi('Screens/start_screen.ui', self)
         self.new_user_current_medication_lst=[]
-        # self.entered_symptoms = []
-        # self.symptom_ids = []
-        # self.disease_ids = []
-        # self.disease_names = []
-        # self.treatments = []
+        self.entered_symptoms = []
+        self.symptom_ids = []
+        self.disease_ids = []
+        self.disease_names = []
+        self.treatments = []
         
         self.selected_symptoms = []  # To store selected symptoms
         self.diseases_found = {}     # To store diseases and their corresponding symptom counts
@@ -181,14 +181,15 @@ class UI(QtWidgets.QMainWindow):
             
     def handle_check_symptoms(self):
         # Clear previous entries
-        # self.entered_symptoms.clear()
-        # self.symptom_ids.clear()
-        # self.disease_ids.clear()
-        # self.disease_names.clear()
-        # self.treatments.clear()
+        self.entered_symptoms.clear()
+        self.symptom_ids.clear()
+        self.disease_ids.clear()
+        self.disease_names.clear()
+        self.treatments.clear()
+        self.selected_symptoms.clear()
         
         for dropdown in [self.symptom_checker_screen.comboBox_2, self.symptom_checker_screen.comboBox_3,self.symptom_checker_screen.comboBox_4, self.symptom_checker_screen.comboBox_5]:
-                        symptom = dropdown.currentText()
+                        symptom = dropdown.currentText().strip()
                         if symptom and symptom != 'Select Symptom':  # Make sure it's not the default value
                             self.selected_symptoms.append(symptom)
                             print("the user selected symptom:",symptom)
@@ -201,29 +202,64 @@ class UI(QtWidgets.QMainWindow):
             return  # Exit the function if not enough symptoms are selected
         
         
-         # Step 2: Process symptoms to check for diseases
+         # Step 2: Lookup symptom_id for each selected symptom
         for symptom in self.selected_symptoms:
-            cursor.execute("SELECT disease_id FROM SymptomCondition WHERE symptom_id = (SELECT symptom_id FROM SymptomsNormalized WHERE description = ?)", symptom)
+            cursor.execute("""
+                SELECT symptom_id FROM SymptomsNormalized WHERE description = ?
+            """, symptom)
+            result = cursor.fetchone()
+            if result:
+                print("for entred symptom:",symptom," found symp_id:",result[0])
+                self.symptom_ids.append(result[0])
+            else:
+                print(f"Symptom '{symptom}' not found in DB.")
+                
+                
+        # Step 3: Get disease IDs for symptoms selected by user
+        for sym_id in self.symptom_ids:
+            cursor.execute("SELECT disease_id FROM SymptomCondition WHERE symptom_id = ?", sym_id)
             results = cursor.fetchall()
             for row in results:
-                disease_id = row[0]
-                if disease_id not in self.diseases_found:
-                    self.diseases_found[disease_id] = 1  # First symptom for this disease
-                else:
-                    self.diseases_found[disease_id] += 1  # Add symptom for this disease
+                print("for symtpom id:",sym_id," found mathcing disease id",row[0])
+                self.disease_ids.append(row[0])
+                
+        # Remove duplicate disease_ids
+        self.disease_ids = list(set(self.disease_ids))
         
-        # Step 3: Check if we have enough symptoms for each disease
-        diseases_to_diagnose = [disease_id for disease_id, count in self.diseases_found.items() if count >= 2]
-        
-        if not diseases_to_diagnose:
+         # Step 4: Count symptoms for each disease
+        self.diseases_found = {}  # Reset dictionary
+        for sym_id in self.symptom_ids:
+            cursor.execute("SELECT disease_id FROM SymptomCondition WHERE symptom_id = ?", (sym_id,))
+            results = cursor.fetchall()
+            for row in results:
+                dis_id = row[0]
+                cursor.execute("SELECT disease_name FROM Diseases WHERE disease_id = ?", (dis_id,))
+                res = cursor.fetchone()
+                if res:
+                    disease_name = res[0]
+                    if disease_name not in self.diseases_found:
+                        self.diseases_found[disease_name] = 0
+                    self.diseases_found[disease_name] += 1  # Count how many t
+
+        # Step 5: Check if diseases have sufficient symptoms (at least 2 symptoms)
+        diseases_to_display = [disease for disease, count in self.diseases_found.items() if count >= 2]      
+        print("diseases to display:",diseases_to_display)
+        if not diseases_to_display:
             msg_box = QMessageBox()
-            msg_box.setWindowTitle("No Diagnosis Available")
-            msg_box.setText("Not enough symptoms selected for any disease. Please try again with more symptoms.")
+            msg_box.setWindowTitle("Insufficient Symptoms")
+            msg_box.setText("No diseases found with sufficient symptoms (at least 2).")
             msg_box.exec()
-            return  # Exit if no disease can be diagnosed based on symptoms
-    
-            
-            
+            return
+        
+        
+        # print("diseases to display:",diseases_to_display)
+        
+        
+        
+        
+        
+        
+                  
         # # Step 1: Get symptoms entered by user
         # raw_input = self.symptom_checker_screen.textEdit.toPlainText()
 
