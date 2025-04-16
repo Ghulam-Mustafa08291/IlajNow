@@ -4,6 +4,9 @@ import sys
 import pyodbc
 from PyQt6.QtWidgets import QTableWidgetItem,QMessageBox
 from datetime import datetime
+import random
+from PyQt6.QtWidgets import QGroupBox, QLineEdit
+
 
 #signup personal info screen values to be stored here
 new_user_name="" 
@@ -64,6 +67,7 @@ class UI(QtWidgets.QMainWindow):
         self.current_password=None
         self.current_user_id=None
         self.symptom_checker_screen=None
+        self.symptom_result_screen=None
 
         # Show the GUI
         self.show()
@@ -252,12 +256,44 @@ class UI(QtWidgets.QMainWindow):
             return
         
         
-        # print("diseases to display:",diseases_to_display)
+        # TILL ABOVE,WE GOT DISEASE WORTHY OF BEING DISPLAYED,NOW BELOW WE WILL DISPLAY ANY RANDOM 3 AT MAX,ON SYMPTOM RESULTS SCREEEN
         
+        # Step 6: Randomly select 3 diseases (if there are more than 3 diseases)
+        if len(diseases_to_display) > 3:
+            diseases_to_display = random.sample(diseases_to_display, 3)
+            
         
-        
-        
-        
+        # Step 7: Display diseases on the Symptoms Results screen
+        # We will now iterate through the diseases to display them on the UI.
+        self.symptom_result_screen=QtWidgets.QMainWindow()
+        uic.loadUi("Screens/symptom_results.ui",self.symptom_result_screen)
+        self.symptom_result_screen.show()
+        for idx, disease_name in enumerate(diseases_to_display):
+            # Query symptoms for the current disease
+            cursor.execute("""
+                SELECT description FROM SymptomsNormalized
+                WHERE symptom_id IN (SELECT symptom_id FROM SymptomCondition WHERE disease_id = (SELECT disease_id FROM Diseases WHERE disease_name = ?))
+            """, disease_name)
+            symptoms = cursor.fetchall()
+            symptom_list = ", ".join([symptom[0] for symptom in symptoms])
+
+            # Query treatment for the current disease
+            cursor.execute("""
+                SELECT description FROM Treatments WHERE disease_id = (SELECT disease_id FROM Diseases WHERE disease_name = ?)
+            """, disease_name)
+            treatment = cursor.fetchone()
+            treatment_text = treatment[0] if treatment else "No treatment information available."
+
+            # Populate the UI with the disease information
+            group_box = self.symptom_result_screen.findChild(QGroupBox, f"groupBox_{idx+1}")
+            possible_condition_lineedit = group_box.findChild(QLineEdit, f"lineEdit_condition_{idx+1}")
+            symptoms_lineedit = group_box.findChild(QLineEdit, f"lineEdit_symptoms_{idx+1}")
+            treatment_lineedit = group_box.findChild(QLineEdit, f"lineEdit_treatment_{idx+1}")
+
+            possible_condition_lineedit.setText(disease_name)
+            symptoms_lineedit.setText(symptom_list)
+            treatment_lineedit.setText(treatment_text)
+            
         
                   
         # # Step 1: Get symptoms entered by user
