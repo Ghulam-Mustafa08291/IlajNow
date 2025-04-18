@@ -5,7 +5,7 @@ import pyodbc
 from PyQt6.QtWidgets import QTableWidgetItem,QMessageBox
 from datetime import datetime
 import random
-from PyQt6.QtWidgets import QGroupBox, QLineEdit
+from PyQt6.QtWidgets import QGroupBox, QLineEdit,QTextEdit
 
 
 #signup personal info screen values to be stored here
@@ -69,7 +69,7 @@ class UI(QtWidgets.QMainWindow):
         self.symptom_checker_screen=None
         self.symptom_result_screen=None
         self.meds_and_remedy_screen=None
-
+        self.remedy_details_screen=None
         # Show the GUI
         self.show()
         # Event Handling
@@ -379,18 +379,52 @@ class UI(QtWidgets.QMainWindow):
         
          # Step 4: Populate Remedy details for one of the symptoms
         remedy_symptom = disease_symptoms[0]  # Use the first symptom from the selected symptoms
-        cursor.execute("SELECT home_remedy, instruction FROM Remedy WHERE symptom_id = ?", (remedy_symptom,))
+        cursor.execute("SELECT home_remedy, instruction, remedy_id FROM Remedy WHERE symptom_id = ?", (remedy_symptom,))
         remedy_info = cursor.fetchone()
-
+        print("remedy info is:",remedy_info)
         remedy_lineedit = self.meds_and_remedy_screen.findChild(QLineEdit, "lineEdit_13")
         instruction_lineedit = self.meds_and_remedy_screen.findChild(QLineEdit, "lineEdit_14")
-
+        remedy_id=remedy_info[2]
         if remedy_info:
             remedy_lineedit.setText(remedy_info[0])
             instruction_lineedit.setText(remedy_info[1])
         else:
             remedy_lineedit.setText("No Remedy Found")
             instruction_lineedit.setText("No Instructions Found") 
+        
+        self.meds_and_remedy_screen.pushButton_6.clicked.connect(
+            lambda: self.handle_view_remedy_detail(remedy_id=remedy_id)
+        )
+        
+        
+    def handle_view_remedy_detail(self,remedy_id):
+        print("tryanna load remedy detail page")
+        self.remedy_details_screen=QtWidgets.QMainWindow()
+        uic.loadUi("Screens/remedy_detail_screen.ui",self.remedy_details_screen)
+        self.remedy_details_screen.show()
+        print("hehe trying to load remedy details screen in dashboard")
+        
+         # Step 1: Query RemedyDetail table to get full_remedy for the given remedy_id
+        cursor.execute("SELECT full_remedy FROM RemedyDetail WHERE remedy_id = ?", (remedy_id,))
+        remedy_detail = cursor.fetchone()
+
+        # Step 2: Check if remedy_detail exists and get the full_remedy
+        if remedy_detail:
+            full_remedy = remedy_detail[0]
+            print(f"Full Remedy: {full_remedy}")  # Optional: Check what we get from the DB
+
+            # Step 4: Find the QTextEdit widget on the screen and set its text
+            remedy_text_edit = self.remedy_details_screen.findChild(QTextEdit, "textEdit")
+
+            if remedy_text_edit:
+                remedy_text_edit.setText(full_remedy)  # Set the remedy details to the QTextEdit widget
+            else:
+                print("Error: QTextEdit widget not found in the UI.")
+        else:
+            print(f"No remedy details found for remedy_id: {remedy_id}")
+        
+        
+        
         
         
     def handle_click(self):
