@@ -68,6 +68,7 @@ class UI(QtWidgets.QMainWindow):
         self.current_user_id=None
         self.symptom_checker_screen=None
         self.symptom_result_screen=None
+        self.meds_and_remedy_screen=None
 
         # Show the GUI
         self.show()
@@ -270,6 +271,7 @@ class UI(QtWidgets.QMainWindow):
         self.symptom_result_screen.show()
         for idx, disease_name in enumerate(diseases_to_display):
             # Query symptoms for the current disease
+            disease_name = disease_name.strip()  # Remove any accidental spaces
             cursor.execute("""
                 SELECT description FROM SymptomsNormalized
                 WHERE symptom_id IN (SELECT symptom_id FROM SymptomCondition WHERE disease_id = (SELECT disease_id FROM Diseases WHERE disease_name = ?))
@@ -294,85 +296,96 @@ class UI(QtWidgets.QMainWindow):
             symptoms_lineedit.setText(symptom_list)
             treatment_lineedit.setText(treatment_text)
             
+        #NOW BELOW WILL WRITE LOGIC FOR VEIWING REMEDY AND MEDICINE FOR A DISEASE
+        disease_1=self.symptom_result_screen.findChild(QLineEdit, "lineEdit_condition_1").text().strip()
+        disease_2=self.symptom_result_screen.findChild(QLineEdit, "lineEdit_condition_2").text().strip()
         
-                  
-        # # Step 1: Get symptoms entered by user
-        # raw_input = self.symptom_checker_screen.textEdit.toPlainText()
+        print("disease_1=",disease_1)
+        print("disease_2=",disease_2)
+        self.symptom_result_screen.pushButton_7.clicked.connect(
+            lambda: self.handle_view_remedies_meds(selected_disease_name=disease_1)
+        )
+        self.symptom_result_screen.pushButton_8.clicked.connect(
+            lambda: self.handle_view_remedies_meds(selected_disease_name=disease_2)
+        )
+       
 
-        # if not raw_input.strip():
-        #     msg_box = QMessageBox()
-        #     msg_box.setWindowTitle("No Input")
-        #     msg_box.setText("Please enter at least one symptom.")
-        #     msg_box.exec()
-        #     return
+    def handle_view_remedies_meds(self,selected_disease_name):
         
-        #  # Step 2: Clean and split symptoms
-        # symptoms = [sym.strip() for sym in raw_input.split(',') if sym.strip()]
-        # self.entered_symptoms = symptoms
+        self.meds_and_remedy_screen=QtWidgets.QMainWindow()
+        uic.loadUi("Screens/meds_&_remedy_screen.ui",self.meds_and_remedy_screen)
+        self.meds_and_remedy_screen.show()
+        print("hehe trying to load meds and remedy screen hehehe")
+        
+        
+        # Step 1: Query the disease_id from the Diseases table using the passed disease_name
+        cursor.execute("SELECT disease_id FROM Diseases WHERE disease_name = ?", (selected_disease_name,))
+        disease_id_result = cursor.fetchone()
+        
+        if not disease_id_result:
+            print(f"Disease with name {selected_disease_name} not found in database.")
+            return  # Exit if no disease found
 
-        # print("Entered Symptoms:", self.entered_symptoms)
-        
-        #  # Step 3: Lookup symptom_id for each
-        # for symptom in self.entered_symptoms:
-        #     cursor.execute("""
-        #         SELECT symptom_id FROM SymptomsNormalized WHERE description = ?
-        #     """, symptom)
-        #     result = cursor.fetchone()
-        #     if result:
-        #         self.symptom_ids.append(result[0])
-        #     else:
-        #         print(f"Symptom '{symptom}' not found in DB.")
-        
-        # print("Symptom IDs found:", self.symptom_ids)
-        
-        # if not self.symptom_ids:
-        #     msg_box = QMessageBox()
-        #     msg_box.setWindowTitle("No Matches")
-        #     msg_box.setText("None of the entered symptoms matched our records.")
-        #     msg_box.exec()
-        #     return
-        
-        #  # Step 4: Get disease IDs from SymptomCondition
-        # for sym_id in self.symptom_ids:
-        #     cursor.execute("SELECT disease_id FROM SymptomCondition WHERE symptom_id = ?", sym_id)
-        #     results = cursor.fetchall()
-        #     for row in results:
-        #         self.disease_ids.append(row[0])
-        # # Optional: Remove duplicate disease_ids
-        # self.disease_ids = list(set(self.disease_ids))
-        
-        # print("disease ids found:",self.disease_ids)
-        # if not self.disease_ids:
-        #     QMessageBox.warning(self, "No Related Conditions", "No conditions found for entered symptoms.")
-        #     return
-        
-        #     # Step 5: Get disease names
-        # for dis_id in self.disease_ids:
-        #     cursor.execute("SELECT disease_name FROM Diseases WHERE disease_id = ?", dis_id)
-        #     res = cursor.fetchone()
-        #     if res:
-        #         self.disease_names.append(res[0])
-        # print("disease name found:",self.disease_names) 
-        #  # Step 6: Get treatments
-        # for dis_id in self.disease_ids:
-        #     cursor.execute("SELECT description FROM Treatments WHERE disease_id = ?", dis_id)
-        #     res = cursor.fetchone()
-        #     if res:
-        #         self.treatments.append(res[0])
-        # print("treatments found:",self.treatments)      
-        #  # Step 7: Show results screen
-        # self.symptom_result_screen = QtWidgets.QMainWindow()
-        # uic.loadUi("Screens/symptom_results.ui", self.symptom_result_screen)
-        # self.symptom_result_screen.show()
+        disease_id = disease_id_result[0]
+        print("Selected Disease ID:", disease_id)
+  
+        # Step 2: Get the disease's symptoms
+        disease_symptoms = []  # A list to store the symptoms related to the selected disease
+        cursor.execute("""
+            SELECT symptom_id FROM SymptomCondition WHERE disease_id = ?
+        """, (disease_id,))
+        disease_symptoms_result = cursor.fetchall()
+        disease_symptoms = [symptom[0] for symptom in disease_symptoms_result]
                     
-        # # Step 8: Populate result fields
-        # self.symptom_result_screen.textEdit.setText('\n'.join(self.disease_names))
-        # self.symptom_result_screen.textEdit_2.setText(', '.join(self.entered_symptoms))
-        # # self.symptom_result_screen.textEdit_3.setText('\n'.join(self.treatments))
-        # formatted_treatments = []
-        # for i in range(len(self.disease_names)):
-        #     formatted_treatments.append(f"For {self.disease_names[i]}, use: {self.treatments[i]}")
-        # self.symptom_result_screen.textEdit_3.setText('\n'.join(formatted_treatments))
+        
+        # Step 2: Pick 2 symptoms randomly from the selected disease's symptoms
+        if len(disease_symptoms) > 2:
+            disease_symptoms = random.sample(disease_symptoms, 2)
+        print("disease_symptoms array:",disease_symptoms)
+        print("printing names of all child widghets",self.meds_and_remedy_screen.findChildren(QGroupBox))  # This will print all groupboxes
+        group_boxes = self.meds_and_remedy_screen.findChildren(QGroupBox)
+        for group_box in group_boxes:
+            print("group box names:",group_box.objectName())  
+
+         # Step 3: Populate medicine details for selected symptoms
+        for idx, symptom_id in enumerate(disease_symptoms):
+            # Query the Medicine table for this symptom_id
+            print("idx+1=",idx+1)
+            cursor.execute("SELECT dosage, use_case, frequency FROM Medicine WHERE symptom_id = ?", (symptom_id,))
+            medicine_info = cursor.fetchone()
+            print("medicine indfo in for meds and remedy screen:",medicine_info)
+            # Populate the UI for each selected symptom
+            group_box = self.meds_and_remedy_screen.findChild(QGroupBox, f"groupBox_{idx+1}")
+            dosage_lineedit = group_box.findChild(QLineEdit, f"lineEdit_dosage_{idx+1}")
+            use_for_lineedit = group_box.findChild(QLineEdit, f"lineEdit_use_for_{idx+1}")
+            frequency_lineedit = group_box.findChild(QLineEdit, f"lineEdit_frequency_{idx+1}")
+
+            # Fill the fields with data
+            if medicine_info:
+                # print("medicine indfo in for meds and remedy screen:",medicine_info)
+                dosage_lineedit.setText(medicine_info[0])
+                use_for_lineedit.setText(medicine_info[1])
+                frequency_lineedit.setText(medicine_info[2])
+            else:
+                dosage_lineedit.setText("Not Available")
+                use_for_lineedit.setText("Not Available")
+                frequency_lineedit.setText("Not Available")                   
+        
+         # Step 4: Populate Remedy details for one of the symptoms
+        # remedy_symptom = disease_symptoms[0]  # Use the first symptom from the selected symptoms
+        # cursor.execute("SELECT home_remedy, instruction FROM Remedy WHERE symptom_id = ?", (remedy_symptom,))
+        # remedy_info = cursor.fetchone()
+
+        # remedy_lineedit = self.meds_and_remedy_screen.findChild(QLineEdit, "lineEdit_remedy")
+        # instruction_lineedit = self.meds_and_remedy_screen.findChild(QLineEdit, "lineEdit_instruction")
+
+        # if remedy_info:
+        #     remedy_lineedit.setText(remedy_info[0])
+        #     instruction_lineedit.setText(remedy_info[1])
+        # else:
+        #     remedy_lineedit.setText("No Remedy Found")
+        #     instruction_lineedit.setText("No Instructions Found") 
+        
         
     def handle_click(self):
         self.start_screen_email_field.setText("Welcome to QT Designer")

@@ -36,10 +36,10 @@
       </rect>
      </property>
      <property name="text">
-      <string>name of med</string>
+      <string>dosage</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_4">
+    <widget class="QLineEdit" name="lineEdit_dosage_2">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -62,7 +62,7 @@
       <string>use for</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_5">
+    <widget class="QLineEdit" name="lineEdit_use_for_2">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -82,10 +82,10 @@
       </rect>
      </property>
      <property name="text">
-      <string>dosage</string>
+      <string>frequency</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_6">
+    <widget class="QLineEdit" name="lineEdit_frequency_2">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -172,16 +172,16 @@
       <rect>
        <x>250</x>
        <y>100</y>
-       <width>121</width>
+       <width>141</width>
        <height>28</height>
       </rect>
      </property>
      <property name="text">
-      <string>view more</string>
+      <string>view remedy detail</string>
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="groupBox_1">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -203,10 +203,10 @@
       </rect>
      </property>
      <property name="text">
-      <string>name of med</string>
+      <string>dosage</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="lineEdit_dosage_1">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -229,7 +229,7 @@
       <string>use for</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
+    <widget class="QLineEdit" name="lineEdit_use_for_1">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -252,10 +252,10 @@
       </rect>
      </property>
      <property name="text">
-      <string>dosage</string>
+      <string>frequency</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_3">
+    <widget class="QLineEdit" name="lineEdit_frequency_1">
      <property name="geometry">
       <rect>
        <x>120</x>
