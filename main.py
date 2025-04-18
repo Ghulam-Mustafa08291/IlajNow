@@ -299,13 +299,19 @@ class UI(QtWidgets.QMainWindow):
         #NOW BELOW WILL WRITE LOGIC FOR VEIWING REMEDY AND MEDICINE FOR A DISEASE
         disease_1=self.symptom_result_screen.findChild(QLineEdit, "lineEdit_condition_1").text().strip()
         disease_2=self.symptom_result_screen.findChild(QLineEdit, "lineEdit_condition_2").text().strip()
+        disease_3=self.symptom_result_screen.findChild(QLineEdit, "lineEdit_condition_3").text().strip()
         
         print("disease_1=",disease_1)
         print("disease_2=",disease_2)
+        print("disease_2=",disease_2)
+
         self.symptom_result_screen.pushButton_7.clicked.connect(
             lambda: self.handle_view_remedies_meds(selected_disease_name=disease_1)
         )
         self.symptom_result_screen.pushButton_8.clicked.connect(
+            lambda: self.handle_view_remedies_meds(selected_disease_name=disease_2)
+        )
+        self.symptom_result_screen.pushButton_9.clicked.connect(
             lambda: self.handle_view_remedies_meds(selected_disease_name=disease_2)
         )
        
@@ -372,23 +378,23 @@ class UI(QtWidgets.QMainWindow):
                 frequency_lineedit.setText("Not Available")                   
         
          # Step 4: Populate Remedy details for one of the symptoms
-        # remedy_symptom = disease_symptoms[0]  # Use the first symptom from the selected symptoms
-        # cursor.execute("SELECT home_remedy, instruction FROM Remedy WHERE symptom_id = ?", (remedy_symptom,))
-        # remedy_info = cursor.fetchone()
+        remedy_symptom = disease_symptoms[0]  # Use the first symptom from the selected symptoms
+        cursor.execute("SELECT home_remedy, instruction FROM Remedy WHERE symptom_id = ?", (remedy_symptom,))
+        remedy_info = cursor.fetchone()
 
-        # remedy_lineedit = self.meds_and_remedy_screen.findChild(QLineEdit, "lineEdit_remedy")
-        # instruction_lineedit = self.meds_and_remedy_screen.findChild(QLineEdit, "lineEdit_instruction")
+        remedy_lineedit = self.meds_and_remedy_screen.findChild(QLineEdit, "lineEdit_13")
+        instruction_lineedit = self.meds_and_remedy_screen.findChild(QLineEdit, "lineEdit_14")
 
-        # if remedy_info:
-        #     remedy_lineedit.setText(remedy_info[0])
-        #     instruction_lineedit.setText(remedy_info[1])
-        # else:
-        #     remedy_lineedit.setText("No Remedy Found")
-        #     instruction_lineedit.setText("No Instructions Found") 
+        if remedy_info:
+            remedy_lineedit.setText(remedy_info[0])
+            instruction_lineedit.setText(remedy_info[1])
+        else:
+            remedy_lineedit.setText("No Remedy Found")
+            instruction_lineedit.setText("No Instructions Found") 
         
         
     def handle_click(self):
-        self.start_screen_email_field.setText("Welcome to QT Designer")
+        self.start_screen_email_field.setPlaceholderText("Enter your email address")
         
     def handle_sign_up(self):
  
