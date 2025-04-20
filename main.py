@@ -164,7 +164,40 @@ class UI(QtWidgets.QMainWindow):
                 print("No seasonal health tip valid for today.")
                 self.dashboard_screen.lineEdit_4.setText("No seasonal tip for today,stay safe :)")
 
+            # Fetch the personalized health tip for the logged-in user
+            cursor.execute("""
+                SELECT tip 
+                FROM PersonalizedHealthTips 
+                WHERE user_id = ?
+            """, self.current_user_id)
+            personalized_tip = cursor.fetchone()
             
+            if personalized_tip:
+                personalized_tip_content = personalized_tip[0]
+                self.dashboard_screen.lineEdit.setText(personalized_tip_content)  # Set personalized health tip text
+            else:
+                print("No personalized health tip found for this user.")
+                self.dashboard_screen.lineEdit.setText("No personalized tip available.")
+                
+            
+            #for health alerts i first generate random id and then use that
+            alert_id = random.randint(1, 60)
+            print(f"Generated random alert_id: {alert_id}")
+            print("the random geenrate alert id is:",alert_id)
+            # Fetch the alert details from the HealthAlerts table using the generated alert_id
+            cursor.execute("""
+                SELECT alert_detailed 
+                FROM HealthAlerts 
+                WHERE alert_id = ?
+            """, alert_id)
+            health_alert = cursor.fetchone()
+            
+            if health_alert:
+                alert_content = health_alert[0]
+                self.dashboard_screen.lineEdit_5.setText(alert_content)  # Set health alert text
+            else:
+                print(f"No alert found for alert_id: {alert_id}")
+                self.dashboard_screen.lineEdit_5.setText("No health alert found.")
             
             # self.home_screen=QtWidgets.QMainWindow() #window is initialized to none in the init function
             # uic.loadUi("HOME.ui",self.home_screen)
