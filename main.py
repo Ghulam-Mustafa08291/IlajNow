@@ -134,6 +134,18 @@ class UI(QtWidgets.QMainWindow):
                     print(f"Medication: {med_name}, Next Dose: {next_dose}") 
                     self.dashboard_screen.lineEdit_2.setText(str(med_name))
                     self.dashboard_screen.lineEdit_3.setText(str(next_dose))
+                    
+                     # Now, check if it's time to take the medication
+                    # Now, check if it's time to take the medication
+                    current_time = datetime.now()
+
+                    # Since next_dose is already a datetime object, no need for strptime
+                    if current_time == next_dose:
+                        msg_box = QMessageBox()
+                        msg_box.setWindowTitle("Medication Reminder")
+                        msg_box.setText(f"Time to take your medication: {med_name}")
+                        msg_box.exec()
+                    
                 else:
                     print("No medication found for this user.")
             else:
