@@ -70,6 +70,7 @@ class UI(QtWidgets.QMainWindow):
         self.symptom_result_screen=None
         self.meds_and_remedy_screen=None
         self.remedy_details_screen=None
+        self.matching_doctors_screen=None
         # Show the GUI
         self.show()
         # Event Handling
@@ -349,9 +350,9 @@ class UI(QtWidgets.QMainWindow):
         print("disease_1=",disease_1)
         print("disease_2=",disease_2)
         print("disease_2=",disease_2)
-
+        #for handling the view remedies screen
         self.symptom_result_screen.pushButton_7.clicked.connect(
-            lambda: self.handle_view_remedies_meds(selected_disease_name=disease_1)
+            lambda: self.handle_view_remedies_meds(selected_disease_name=disease_1) #did lamda thing to pass argueements in funcitons when calling them
         )
         self.symptom_result_screen.pushButton_8.clicked.connect(
             lambda: self.handle_view_remedies_meds(selected_disease_name=disease_2)
@@ -359,7 +360,33 @@ class UI(QtWidgets.QMainWindow):
         self.symptom_result_screen.pushButton_9.clicked.connect(
             lambda: self.handle_view_remedies_meds(selected_disease_name=disease_2)
         )
+        
+        #below will handle when consult doctor is clicked instead
+        self.symptom_result_screen.consult_dr_button_1.clicked.connect(
+            lambda: self.handle_consult_doctor(selected_disease_name=disease_1)  # Pass disease_1 
+        )
+        
+        self.symptom_result_screen.consult_dr_button_2.clicked.connect(
+            lambda: self.handle_consult_doctor(selected_disease_name=disease_2)  # Pass disease_2 
+        )
+        
        
+    def handle_consult_doctor(self,selected_disease_name): #when the consult doctor button is pushed
+        self.matching_doctors_screen=QtWidgets.QMainWindow()
+        uic.loadUi("Screens/matching_doctors_screen.ui",self.matching_doctors_screen)
+        self.matching_doctors_screen.show()
+        print("hehe trying to load MATHICNG DOCTORS SCREEN hehehe")   
+        
+        # Get the disease ID using the disease name (selected_disease_name)
+        cursor.execute("""
+            SELECT disease_id FROM Diseases WHERE disease_name = ?
+        """, selected_disease_name)
+        disease_id = cursor.fetchone()
+        
+        print("matching dr screen----> disease name:",selected_disease_name," disease_id:",disease_id)
+        
+        
+             
 
     def handle_view_remedies_meds(self,selected_disease_name):
         
