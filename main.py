@@ -349,7 +349,7 @@ class UI(QtWidgets.QMainWindow):
         
         print("disease_1=",disease_1)
         print("disease_2=",disease_2)
-        print("disease_2=",disease_2)
+        print("disease_3=",disease_3)
         #for handling the view remedies screen
         self.symptom_result_screen.pushButton_7.clicked.connect(
             lambda: self.handle_view_remedies_meds(selected_disease_name=disease_1) #did lamda thing to pass argueements in funcitons when calling them
@@ -358,7 +358,7 @@ class UI(QtWidgets.QMainWindow):
             lambda: self.handle_view_remedies_meds(selected_disease_name=disease_2)
         )
         self.symptom_result_screen.pushButton_9.clicked.connect(
-            lambda: self.handle_view_remedies_meds(selected_disease_name=disease_2)
+            lambda: self.handle_view_remedies_meds(selected_disease_name=disease_3)
         )
         
         #below will handle when consult doctor is clicked instead
@@ -372,6 +372,7 @@ class UI(QtWidgets.QMainWindow):
         
        
     def handle_consult_doctor(self,selected_disease_name): #when the consult doctor button is pushed
+        print("in matching dr screen,selected_disease_name=",selected_disease_name)
         self.matching_doctors_screen=QtWidgets.QMainWindow()
         uic.loadUi("Screens/matching_doctors_screen.ui",self.matching_doctors_screen)
         self.matching_doctors_screen.show()
@@ -384,9 +385,64 @@ class UI(QtWidgets.QMainWindow):
         disease_id = cursor.fetchone()
         
         print("matching dr screen----> disease name:",selected_disease_name," disease_id:",disease_id)
+        if disease_id:
+            disease_id = disease_id[0]
+            print(f"Found Disease ID: {disease_id}")
         
-        
+            # Query doctors treating this disease using the disease_id
+            cursor.execute("""
+                SELECT doctor_id FROM DoctorDiseases WHERE disease_id = ?
+            """, disease_id)
+            doctor_ids = cursor.fetchall()
+            
+            # Limit to first 2 doctors if more than 2 doctors are found
+            if len(doctor_ids) > 2:
+                doctor_ids = doctor_ids[:2]
+                print("mathcing dr screen--> doctor ids array=",doctor_ids)
+                
              
+            # Fetch doctor details for the selected doctor IDs
+            for idx, doctor_data in enumerate(doctor_ids):
+                doctor_id = doctor_data[0]
+                
+                    # Query doctor details
+                cursor.execute("""
+                    SELECT name, specialization, location, fees FROM Doctors WHERE doctor_id = ?
+                """, doctor_id)
+                doctor_details = cursor.fetchone()
+
+                if doctor_details:
+                    doctor_name, specialization, location, fees = doctor_details
+                    
+                    # Query availability details for the doctor
+                    cursor.execute("""
+                        SELECT day_of_week, start_time, end_time FROM DoctorAvailability WHERE doctor_id = ?
+                    """, doctor_id)
+                    availability_details = cursor.fetchall()
+                    
+                    availability_str = ""
+                    for avail in availability_details:
+                        availability_str += f"{avail[0]}: {avail[1]} - {avail[2]}\n"
+
+                     # Fill in the doctor details in the group boxes
+                    group_box = self.matching_doctors_screen.findChild(QGroupBox, f"groupBox_{idx+1}")
+                    doctor_name_lineedit = group_box.findChild(QLineEdit, f"lineEdit_doctor_name_{idx+1}")
+                    specialization_lineedit = group_box.findChild(QLineEdit, f"lineEdit_specialization_{idx+1}")
+                    location_lineedit = group_box.findChild(QLineEdit, f"lineEdit_location_{idx+1}")
+                    availability_lineedit = group_box.findChild(QLineEdit, f"lineEdit_availability_{idx+1}")
+                    fees_lineedit = group_box.findChild(QLineEdit, f"lineEdit_fees_{idx+1}")
+                    print(f"lineEdit_location_{idx+1}")
+                    # Set text for each line edit
+                    doctor_name_lineedit.setText(doctor_name)
+                    specialization_lineedit.setText(specialization)
+                    location_lineedit.setText(location)
+                    availability_lineedit.setText(availability_str)
+                    fees_lineedit.setText(str(fees))
+                else:
+                    print("No doctor details found.")
+        else:
+            print("No matching disease found.")
+
 
     def handle_view_remedies_meds(self,selected_disease_name):
         
