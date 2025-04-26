@@ -370,6 +370,10 @@ class UI(QtWidgets.QMainWindow):
             lambda: self.handle_consult_doctor(selected_disease_name=disease_2)  # Pass disease_2 
         )
         
+        self.symptom_result_screen.consult_dr_button_3.clicked.connect(
+            lambda: self.handle_consult_doctor(selected_disease_name=disease_3)  # Pass disease_2 
+        )
+        
        
     def handle_consult_doctor(self,selected_disease_name): #when the consult doctor button is pushed
         print("in matching dr screen,selected_disease_name=",selected_disease_name)
