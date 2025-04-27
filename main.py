@@ -71,6 +71,7 @@ class UI(QtWidgets.QMainWindow):
         self.meds_and_remedy_screen=None
         self.remedy_details_screen=None
         self.matching_doctors_screen=None
+        self.book_appointment_screen=None
         # Show the GUI
         self.show()
         # Event Handling
@@ -404,7 +405,7 @@ class UI(QtWidgets.QMainWindow):
                 doctor_ids = doctor_ids[:2]
                 print("mathcing dr screen--> doctor ids array=",doctor_ids)
                 
-             
+            print("testing smth heehe",doctor_ids[0][0]) #so can access and then pass the dr id like this in load_book_appointment fucntion
             # Fetch doctor details for the selected doctor IDs
             for idx, doctor_data in enumerate(doctor_ids):
                 doctor_id = doctor_data[0]
@@ -444,10 +445,53 @@ class UI(QtWidgets.QMainWindow):
                     fees_lineedit.setText(str(fees))
                 else:
                     print("No doctor details found.")
+            self.matching_doctors_screen.select_dr_button_1.clicked.connect(
+                lambda: self.load_book_appointment_screen(doctor_id=doctor_ids[0][0])  # Pass disease_2 
+            )
+            self.matching_doctors_screen.select_dr_button_2.clicked.connect(
+                lambda: self.load_book_appointment_screen(doctor_id=doctor_ids[1][0])  # Pass disease_2 
+            )
         else:
             print("No matching disease found.")
 
-
+    def load_book_appointment_screen(self, doctor_id):
+        # Step 1: Open the book appointment screen
+        self.book_appointment_screen = QtWidgets.QMainWindow()
+        uic.loadUi("Screens/book_an_appointment_screen.ui", self.book_appointment_screen)
+        self.book_appointment_screen.show()
+        
+        # Step 2: Fetch doctor details
+        cursor.execute("""
+            SELECT name, specialization, location 
+            FROM Doctors 
+            WHERE doctor_id = ?
+        """, (doctor_id,))
+        doctor_details = cursor.fetchone()
+        
+        if doctor_details:
+            doctor_name, specialization, location = doctor_details
+            
+            # Step 3: Fetch availability details
+            cursor.execute("""
+                SELECT day_of_week, start_time, end_time 
+                FROM DoctorAvailability 
+                WHERE doctor_id = ?
+            """, (doctor_id,))
+            availability_details = cursor.fetchall()
+            
+            availability_text = ""
+            for avail in availability_details:
+                availability_text += f"{avail[0]}: {avail[1]} - {avail[2]}\n"
+            
+            # Step 4: Populate fields in book appointment screen
+            self.book_appointment_screen.findChild(QLineEdit, "lineEdit").setText(doctor_name)
+            self.book_appointment_screen.findChild(QLineEdit, "lineEdit_2").setText(specialization)
+            self.book_appointment_screen.findChild(QLineEdit, "lineEdit_3").setText(location)
+            self.book_appointment_screen.findChild(QLineEdit, "lineEdit_4").setText(availability_text)
+        
+        else:
+            print("Doctor not found in database.")
+        
     def handle_view_remedies_meds(self,selected_disease_name):
         
         self.meds_and_remedy_screen=QtWidgets.QMainWindow()

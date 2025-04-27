@@ -1262,7 +1262,7 @@ INSERT INTO HealthAlerts (day, alert_short, alert_detailed) VALUES
 (5, 'Fire Safety', 'Test smoke detectors and check fire extinguisher'),
 (6, 'Fall Prevention', 'Remove tripping hazards in home'),
 (7, 'Water Safety', 'Review water safety if you have a pool'),
-(8, 'Food Safety', 'Check refrigerator temperature (below 40°F)'),
+(8, 'Food Safety', 'Check refrigerator temperature (below 40ï¿½F)'),
 (9, 'Disaster Prep', 'Update emergency disaster supplies'),
 (10, 'Travel Health', 'Check travel health recommendations if planning trip'),
 (11, 'Sun Safety', 'Apply sunscreen when going outdoors'),
@@ -1510,20 +1510,20 @@ SELECT * FROM Medical_conditions;
 SELECT * FROM UserMedicalCondition;
 SELECT * FROM Allergies;
 SELECT * FROM UserAllergy;
-SELECT * FROM Medications;
+SELECT * FROM Medications;    #this has user ki medications
 SELECT * FROM Doctors;
 SELECT * FROM DoctorAvailability;
 SELECT * FROM Diseases;
 SELECT * FROM DoctorDiseases;
 SELECT * FROM SymptomsNormalized;
-SELECT * FROM SymptomCondition;
+SELECT * FROM SymptomCondition;     #diseads id to symptom id mapping
 SELECT * FROM Treatments;
 SELECT * FROM Appointments;
 SELECT * FROM Orders;
 SELECT * FROM HealthTips;
 SELECT * FROM HealthAlerts;
 SELECT * FROM PersonalizedHealthTips;
-SELECT * FROM Medicine;
+SELECT * FROM Medicine;      #symtpom id to medinice id,dosage,frequency etc mapping
 SELECT * FROM Remedy;
 SELECT * FROM RemedyDetail;
 
