@@ -488,10 +488,73 @@ class UI(QtWidgets.QMainWindow):
             self.book_appointment_screen.findChild(QLineEdit, "lineEdit_2").setText(specialization)
             self.book_appointment_screen.findChild(QLineEdit, "lineEdit_3").setText(location)
             self.book_appointment_screen.findChild(QLineEdit, "lineEdit_4").setText(availability_text)
+            
+            self.book_appointment_screen.pushButton.clicked.connect(
+                lambda: self.handle_book_appointment(doctor_id=doctor_id)  # Pass disease_2 
+            )
         
         else:
             print("Doctor not found in database.")
+            
+    def handle_book_appointment(self,doctor_id):
+        # Get the selected date and time from the UI
+        selected_date = self.book_appointment_screen.dateEdit.date()  # QDateEdit for date (use date() instead of selectedDate())
+        selected_time = self.book_appointment_screen.comboBox_2.currentText()  # QComboBox for time
         
+        # Extract the day of the week from the selected date (1 = Monday, 7 = Sunday)
+        selected_day_of_week = selected_date.dayOfWeek()
+
+        # Convert selected time to 24-hour format (e.g., "14:00" for 2 PM)
+        selected_time = selected_time.strip()  # Ensure no extra spaces are included
+        
+        # Convert day of the week from integer to string (e.g., 1 = Monday, 2 = Tuesday, ...)
+        days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        selected_day_name = days_of_week[selected_day_of_week - 1]  # Map to string (list is 0-indexed)
+        
+        # Print for debugging
+        print(f"Selected Date: {selected_date.toString('yyyy-MM-dd')}, Selected Day of Week: {selected_day_name}")
+        print(f"Selected Time: {selected_time}")
+        # Check if the selected time is within the available hours for the doctor
+        cursor.execute("""
+            SELECT day_of_week, start_time, end_time FROM DoctorAvailability
+            WHERE doctor_id = ? AND day_of_week = ?
+        """, (doctor_id, selected_day_name))  # Use selected_day_name (string) in query
+            
+        availability_details = cursor.fetchall()
+        if not availability_details:
+            # Doctor is not available on the selected day
+            msg_box = QMessageBox()
+            msg_box.setWindowTitle("Doctor Unavailable")
+            msg_box.setText(f"Doctor is not available on the selected day (Day: {selected_day_of_week}).")
+            msg_box.exec()
+            return
+        
+         # Check if the selected time falls within the doctor's available time for that day
+        for availability in availability_details:
+            start_time = availability[1]  # start_time in format HH:mm
+            end_time = availability[2]    # end_time in format HH:mm
+            
+            # Compare selected time (from the ComboBox) with available time range
+            if start_time <= selected_time <= end_time:
+                # If valid, proceed to store the appointment
+                appointment_datetime = f"{selected_date.toString('yyyy-MM-dd')} {selected_time}:00"
+                print(f"Valid appointment time selected: {appointment_datetime}")
+
+                # Insert into the appointments table
+                cursor.execute("""
+                    INSERT INTO Appointments (doctor_id, patient_id, appointment_datetime)
+                    VALUES (?, ?, ?)
+                """, (doctor_id, self.current_user_id, appointment_datetime))
+                connection.commit()
+                
+                # Confirm appointment booking
+                msg_box = QMessageBox()
+                msg_box.setWindowTitle("Appointment Booked")
+                msg_box.setText(f"Your appointment has been booked with Doctor {doctor_id} for {appointment_datetime}.")
+                msg_box.exec()
+                print(f"Appointment successfully booked for {appointment_datetime}")
+                return
+            
     def handle_view_remedies_meds(self,selected_disease_name):
         
         self.meds_and_remedy_screen=QtWidgets.QMainWindow()
